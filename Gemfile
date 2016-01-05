@@ -8,9 +8,28 @@ group :production do
    gem 'pg'
 end
 
+gem 'bootstrap-sass'
+
+gem 'bcrypt'
+
 group :development, :test do
   gem 'sqlite3'
+
+  #CLI gem for irb
+  gem 'pry-rails'
+
+  #Testing gems
+  gem 'shoulda'
+  gem 'rspec-rails', '~> 3.0'
+  gem "faker"
+
+  #Gem to help with keeping your code DRY
+  gem 'factory_girl_rails', '~> 4.0'
+
+  #Gems to help with debugging
   gem 'byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Use SCSS for stylesheets

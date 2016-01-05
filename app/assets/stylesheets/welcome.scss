@@ -1,0 +1,53 @@
+
+#sign-up {
+border: solid;
+margin:auto;
+margin-top: 25px;
+margin-bottom: 25px;
+padding-top: 25px;
+color: black;
+width: 500px;
+height: 130px;
+text-align: center;
+
+}
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+#index-title {
+  text-align: center;
+  font-size: 15px;
+  color: blue;
+}
+
+.posts {
+  border: solid;
+  margin: 5px;
+  padding: 5px;
+  height: 200px
+}
+
+section {
+  background: #5998ff;
+  border-style: solid;
+  border-width: 5px;
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+}
+
+.social-btn {
+  color: white;
+  margin :5px 5px 15px 0px;
+  width:165px;
+  padding: 10px;
+  border-radius: 25px;
+  background: #337ab7;
+  text-align:center;
+  font-weight: bold;
+  display:inline-block;
+}
