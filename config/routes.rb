@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
-  get 'welcome/about'
 
-  resources :users, only: [:new, :create, :show]
-  resources :sessions, only: [:new, :create, :destroy]
+  devise_for :users
+  get 'welcome/about'
+  get 'users/show'
+
+  #resources :users, only: [:new, :create, :show]
+  #resources :sessions, only: [:new, :create, :destroy]
   resources :wikis, only: [:index, :new, :create, :show, :edit]
 
   root to: 'welcome#index'

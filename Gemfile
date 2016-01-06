@@ -12,6 +12,10 @@ gem 'bootstrap-sass'
 
 gem 'bcrypt'
 
+gem 'devise'
+
+gem 'figaro', '1.0'
+
 group :development, :test do
   gem 'sqlite3'
 

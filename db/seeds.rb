@@ -1,5 +1,7 @@
 include RandomData
 
+=begin
+
 5.times do
    user = User.create!(
    name:     RandomData.random_name,
@@ -30,5 +32,7 @@ standard = User.create!(
    role: 'premium'
  )
 
+
+=end
  puts "Seed finished"
  puts "#{User.count} users created"
