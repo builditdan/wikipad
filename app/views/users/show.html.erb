@@ -11,11 +11,13 @@
        <% end %>
 
        <div class="media-body">
-         <h2 class="media-heading"><%= @user.email %></h2>
+         <h2 class="media-heading"><%= @user.name %></h2>
+
        </div>
      </div>
    </div>
  </div>
 
+ <br>
 
- <h2>Need to add Stats like Wiki Posts</h2>
+ <%= link_to "Edit Registration", edit_user_registration_path, class: 'btn btn-primary' %>
