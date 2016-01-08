@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+# if self role is not defined then default to a member role
+  before_save {self.role ||= :standard }
 
   def avatar_url(size)
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
@@ -12,5 +14,7 @@ class User < ActiveRecord::Base
   end
 
   #attr_accessible :email, :password, :name, :password_confirmation
+  enum role: [:standard, :admin, :premium]
+
 
 end

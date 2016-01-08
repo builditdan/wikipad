@@ -37,6 +37,8 @@ class WikisController < ApplicationController
 
     def update
       @wiki = Wiki.find(params[:id])
+      byebug
+      authorize @wiki
       @wiki.assign_attributes(wiki_params)
       @wiki.user_id = current_user.id
       if @wiki.save

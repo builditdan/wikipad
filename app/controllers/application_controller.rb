@@ -3,12 +3,12 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  #include SessionsHelper
+  include Pundit
 
 
 before_filter :configure_permitted_parameters, if: :devise_controller?
 #Not enabling the authenticate action just yet as I want the welcome screen to show
-#for new users and users not logged in 
+#for new users and users not logged in
 #before_action :authenticate_user!
 
      protected
