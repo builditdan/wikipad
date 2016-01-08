@@ -1,4 +1,8 @@
+
 module SessionsHelper
+
+=begin
+# if you uncomment this code it will break the sign in and sign out buttons
 
 def create_session(user)
   session[:user_id] = user.id
@@ -29,5 +33,5 @@ def create_it
   end
 
 end
-
+=end
 end

@@ -1,4 +1,4 @@
-include SessionsHelper
+#include SessionsHelper
 class WikisController < ApplicationController
 
 

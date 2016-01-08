@@ -10,8 +10,9 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe SessionsHelper, type: :helper do
 
+RSpec.describe SessionsHelper, type: :helper do
+=begin
   def create_session(user)
      session[:user_id] = user.id
   end
@@ -24,5 +25,5 @@ RSpec.describe SessionsHelper, type: :helper do
  def current_user
    User.find_by(id: session[:user_id])
  end
-
+=end
 end

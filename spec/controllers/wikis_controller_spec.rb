@@ -1,6 +1,7 @@
 require 'rails_helper'
 include RandomData
-include SessionsHelper
+include Devise::TestHelpers
+
 
 RSpec.describe WikisController, type: :controller do
   let(:my_user) {User.create!(name: "Bill Smith", email: "bill@example.com", password: "password")}
@@ -8,9 +9,10 @@ RSpec.describe WikisController, type: :controller do
 
 context "standard user" do
 
+  #Sign in the new user and confirm there email response
   before do
-    #user = User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld", role: :member)
-    create_session(my_user)
+    sign_in my_user
+    my_user.confirm
   end
 
   describe "GET show" do
