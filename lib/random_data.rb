@@ -19,30 +19,20 @@ module RandomData
  end
 
   def random_paragraph
-    sentences = []
-    rand(4..6).times do
-      sentences << random_sentence
-    end
-
-    sentences.join(" ")
+    Faker::Hipster.paragraph
   end
 
   def random_sentence
-    #strings = []
-    #rand(3..8).times do
-    #  strings << random_word
-    #end
-
-    #sentence = strings.join(" ")
-    #sentence.capitalize << "."
-    Faker::Hacker.say_something_smart.capitalize
-
+    #Faker::Hacker.say_something_smart.capitalize
+    Faker::Hipster.sentence.capitalize
   end
 
   def random_word
-    letters = ('a'..'z').to_a
-    letters.shuffle!
-    letters[0,rand(3..8)].join
+    Faker::Hipster.words(1)    
+  end
+
+  def random_avatar_image
+    Faker::Avatar.image
   end
 
 end
