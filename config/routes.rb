@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'welcome/about'
   get 'users/show'
 
+
   #resources :users, only: [:new, :create, :show]
   #resources :sessions, only: [:new, :create, :destroy]
   resources :wikis

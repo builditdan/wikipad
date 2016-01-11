@@ -1,42 +1,71 @@
 class ApplicationPolicy
-  attr_reader :user, :record
+  attr_reader :user, :record, :params
 
   def initialize(user, record)
+
     @user = user
     @record = record
+  
   end
 
   def index?
-    false
+  
+    true
+
   end
 
   def show?
-    scope.where(:id => record.id).exists?
+  
+    true
+
   end
 
   def create?
-    false
+
+    user_logged_in?
+
   end
 
   def new?
-    create?
+   
+    if user == nil
+      false
+    else
+      true
+    end
+  
   end
-
+  
   def update?
-    false
+
+    # wiki_policy.rb is handling policy validations 
+  
   end
 
   def edit?
-    update?
+
+    user_logged_in?
+     
   end
 
   def destroy?
+   
+    if !user_logged_in?
+      false
+    elsif user.admin? 
+       return true
     false
-  end
+       false
+    end
 
+  end        
+  
+  
+  
   def scope
     Pundit.policy_scope!(user, record.class)
   end
+
 
   class Scope
     attr_reader :user, :scope
@@ -50,4 +79,18 @@ class ApplicationPolicy
       scope
     end
   end
+
+  private  
+
+  def user_logged_in?
+  
+    if user == nil
+      false
+    else
+      true
+    end
+  
+  end  
+
+
 end
