@@ -10,19 +10,20 @@ require 'rails_helper'
 #     end
 #   end
 # end
+
 RSpec.describe SessionsHelper, type: :helper do
+=begin
   def create_session(user)
      session[:user_id] = user.id
-   end
+  end
 
 
-   def destroy_session(user)
-     session[:user_id] = nil
-   end
+  def destroy_session(user)
+    session[:user_id] = nil
+  end
 
-
-   def current_user
-     User.find_by(id: session[:user_id])
-   end
-
+ def current_user
+   User.find_by(id: session[:user_id])
+ end
+=end
 end
