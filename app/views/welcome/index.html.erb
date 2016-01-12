@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="jumbotron" style="color:white; background-color:brown">
+     <h1>Wiki Pad: Social, Markdown Wikis</h1>
+     <p>Wiki Pad will let you create and edit your very own Wiki!</p>
+  </div>
+
+ <% if !current_user %>
+   <div class="col-md-12 style="text-align:center">
+     <div id="sign-up">
+       <h4>Create and share Markdown capable Wikis</h4>
+       <%= link_to "Sign In", new_session_path %> or
+       <%= link_to "Sign Up", new_user_path, class: 'btn btn-primary' %> today!
+     </div>
+   </div>
+ <% end %>
+
+   <div class="row">
+     <div class="col-md-4">
+       <h2>Be Creativity</h2>
+       <p>WikiPad will deliver food and water to those in need, all over the world.</p>
+     </div>
+     <div class="col-md-4">
+       <h2>Be Social</h2>
+       <p>WikiPad will deliver money and education to those in need, all over the world.</p>
+     </div>
+     <div class="col-md-4">
+       <h2>Learn More</h2>
+       <p>WikiPad will make you better looking: it's scientifically proven to make men look like Ryan Gosling and women look like Shakira.</p>
+     </div>
+   </div>
+
+</div>
