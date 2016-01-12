@@ -1,9 +1,10 @@
 require 'rails_helper'
 include RandomData
+include MyUtils
 include Devise::TestHelpers
 
 
-RSpec.describe UsersController, type: :controller do
+RSpec.describe UsersController, type: :request do
 
     let (:new_user_attributes) do
       {
@@ -20,17 +21,15 @@ RSpec.describe UsersController, type: :controller do
 
          
       it "returns http success" do
-        #get :new => new_user_registration Controller#Action    new_user_session GET    /users/sign_in(.:format)          devise/sessions#new
-        #devise/registrations#new
-       get new: 
-       #expect(:get => new_user_session_path).to have_http_status(:success)
-       expect(message).to have_http_status(:success)
+       get new_user_session_path
+       expect(response.response_code).to eq(webstatus_to_code(:ok))
+       #expect(message).to render_template(:new) #---- works as well but needed to change type to 'type: :request'  on the RSpec define above.
       end
 
-#      it "instantiates a new user" do
- #       get :new =>  new_user_session
-  #      expect(:user).to_not be_nil
-   #   end
+      it "instantiates a new user" do
+        get new_user_registration_path
+        expect(:user).to_not be_nil 
+      end
 
     end
 
