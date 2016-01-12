@@ -8,24 +8,29 @@ class WikisController < ApplicationController
 
     def index
       @wikis = Wiki.all
+      authorize @wikis
 
     end
 
     def show
       @wiki = Wiki.find(params[:id])
+      authorize @wiki
     end
 
     def new
       @wiki = Wiki.new
+      authorize @wiki
     end
 
     def edit
       @wiki = Wiki.find(params[:id])
+      authorize @wiki
     end
 
     def create
       @wiki = Wiki.new(wiki_params)
       @wiki.user_id = current_user.id
+      authorize @wiki
       if @wiki.save
         redirect_to @wiki, notice: "Wiki was saved successfully."
       else
@@ -38,7 +43,7 @@ class WikisController < ApplicationController
     def update
       @wiki = Wiki.find(params[:id])
       @wiki.assign_attributes(wiki_params)
-      @wiki.user_id = current_user.id
+      authorize @wiki
       if @wiki.save
         redirect_to @wiki, notice: "Wiki was updated successfully."
       else
@@ -49,6 +54,7 @@ class WikisController < ApplicationController
 
     def destroy
       @wiki = Wiki.find(params[:id])
+      authorize @wiki
       if @wiki.destroy
         flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
         redirect_to action: :index

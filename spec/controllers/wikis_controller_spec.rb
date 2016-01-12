@@ -4,15 +4,15 @@ include Devise::TestHelpers
 
 
 RSpec.describe WikisController, type: :controller do
-  let(:my_user) {User.create!(name: "Bill Smith", email: "bill@example.com", password: "password")}
+  let(:my_user) {User.create!(name: "Bill Smith", email: "bill@example.com", password: "password", confirmed_at: Time.now)}
   let(:my_wiki) {Wiki.create!(title: "My first wiki", body: " This is some cool text to add to my wiki", private: false, user_id: my_user.id)}
 
-context "standard user" do
+  context "standard user" do
 
   #Sign in the new user and confirm there email response
   before do
     sign_in my_user
-    my_user.confirm
+    # my_user.confirm ==> not needed since I update the confirmed_at field
   end
 
   describe "GET show" do
@@ -83,7 +83,10 @@ context "standard user" do
   end
 
   describe "DELETE destroy" do
+   
     it "returns http redirect" do
+       #can only be done by admin
+      my_user.admin!
       delete :destroy, {id: my_wiki.id}
       expect(response).to redirect_to wikis_path
     end
