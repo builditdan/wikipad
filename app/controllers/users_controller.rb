@@ -3,6 +3,7 @@ include SessionsHelper
 
   def show
     @user = current_user
+    
       #@posts = @user.posts.visible_to(current_user)
   end
 

@@ -11,5 +11,6 @@ class User < ActiveRecord::Base
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
+  #attr_accessible :email, :password, :name, :password_confirmation
 
 end
