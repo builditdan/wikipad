@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
 before_filter :configure_permitted_parameters, if: :devise_controller?
 #Not enabling the authenticate action just yet as I want the welcome screen to show
 #for new users and users not logged in
-#before_action :authenticate_user!
+before_action :authenticate_user!, except: [:index, :show]
+
+
 
      protected
 

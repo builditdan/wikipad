@@ -5,17 +5,17 @@ class ApplicationPolicy
 
     @user = user
     @record = record
-  
+
   end
 
   def index?
-  
+
     true
 
   end
 
   def show?
-  
+
     true
 
   end
@@ -27,41 +27,41 @@ class ApplicationPolicy
   end
 
   def new?
-   
+
     if user == nil
       false
     else
       true
     end
-  
+
   end
-  
+
   def update?
 
-    # wiki_policy.rb is handling policy validations 
-  
+    # wiki_policy.rb is handling policy validations
+
   end
 
   def edit?
 
     user_logged_in?
-     
+
   end
 
   def destroy?
-   
+
     if !user_logged_in?
       false
-    elsif user.admin? 
-       return true
-    false
-       false
+    elsif user.admin?
+       true
+    else
+      false
     end
 
-  end        
-  
-  
-  
+  end
+
+
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end
@@ -80,17 +80,17 @@ class ApplicationPolicy
     end
   end
 
-  private  
+  private
 
   def user_logged_in?
-  
+
     if user == nil
       false
     else
       true
     end
-  
-  end  
+
+  end
 
 
 end

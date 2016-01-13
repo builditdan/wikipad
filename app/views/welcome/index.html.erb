@@ -2,6 +2,14 @@
   <div class="jumbotron" style="color:white; background-color:brown">
      <h1>Wiki Pad: Social, Markdown Wikis</h1>
      <p>Wiki Pad will let you create and edit your very own Wiki!</p>
+     <% if current_user %>
+       <%if current_user.standard? %>
+         <div class="text-right">
+         <%= link_to "Upgrade", new_charge_path, class: 'btn btn-default' %>
+         <span style="color:white; font-size:125%">&nbsp;to a Premium Account!</span>
+      </div>
+      <% end %>
+    <% end %>
   </div>
 
  <% if !current_user %>
