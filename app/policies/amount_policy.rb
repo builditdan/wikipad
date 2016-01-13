@@ -2,8 +2,8 @@ class AmountPolicy < ApplicationPolicy
   attr_reader :user # :params
 
    def new?
-      byebug
-      if user == nil
+
+      if user.blank?
       	return false
       elsif user.standard?
       	return true

@@ -7,9 +7,8 @@ class WikisController < ApplicationController
   #before_action :authorize_moderator, except: [:show, :new,]
 
     def index
-      @wikis = Wiki.all
+      @wikis = Wiki.show_by_role(current_user)
       authorize @wikis
-
     end
 
     def show

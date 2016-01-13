@@ -8,8 +8,6 @@ before_action :authenticate_user!
     @user = current_user
     @amount = Amount.find_by(user_id: current_user.id)
 
-    @refund_status = validate_refund(@amount)
-
     @stripe_btn_data = {
      key: "#{ Rails.configuration.stripe[:publishable_key] }",
      description: "Premium Downgrade",
@@ -36,24 +34,17 @@ before_action :authenticate_user!
      @amount = Amount.find_by(user_id: current_user.id)
      authorize Amount
 
-     # Checking if somehow money was not refunded due to the account
-     # being downgraded but not refunded, exclude if past 30 days
-     if @amount != nil
-        if @amount.amount_refunded == 0 && @amount.amount_billed != nil && @amount.updated_at <= (Date.today - 30.days)
-          flash[:notice] = "Unable to upgrade account, please email support!"
+     if @amount.unprocessed_refund?
+          flash[:notice] = "Unable to upgrade account due to unprocessed refund, please email support!"
           redirect_to users_show_path(current_user)
           return
-     # Giving free upgrades if they prevsiouly paid in the last 90 days and did not recieve a refund
-        elsif @amount.updated_at >= (Date.today - 90.days) && @amount.amount_refunded == 0
-          byebug
+     elsif @amount.last_90days_refund?
           current_user.premium!
           current_user.save
-          flash[:notice] = "No charge since you upgraded previously in the last 90 days"
+          flash[:notice] = "No charge for upgrade since you upgraded previously in the last 90 days!"
           redirect_to users_show_path(current_user)
           return
-        end
-
-      end
+     end
 
      # Creates a Stripe Customer object, for associating
      # with the charge
@@ -98,13 +89,16 @@ before_action :authenticate_user!
         authorize Amount
         @amount = Amount.find_by(user_id: current_user.id)
 
-        if @refund_status == APPROVED
+
+        if @amount.valid_refund?
           customer = Stripe::Refund.create(
             charge: @amount.charge_id,
           )
           @amount.amount_refunded = customer.amount
           @amount.save
           amount_refunded = customer.amount / 100
+        else
+          amount_refunded = 0
         end
 
         # Downgrade the account to standard and update the amount refunded

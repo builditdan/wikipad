@@ -10,13 +10,21 @@ class ApplicationPolicy
 
   def index?
 
-    true
+  true
 
   end
 
   def show?
 
-    true
+    if @record.private
+      if (!@user.blank? && @user.admin?) or (!@user.blank? && @user.premium?)
+        true
+      else
+        false
+      end
+    else
+      true
+    end
 
   end
 

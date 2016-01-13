@@ -7,10 +7,10 @@
      <strong>Upgrade date:</strong>  <%= @amount.created_at %><br>
      <strong>Charged Amount:</strong>  <%= Money.us_dollar(@amount.amount_billed).format %><br>
      <br>
-     <% if @refund_status == APPROVED %>
+     <% if @amount.valid_refund? %>
        <p style="color:green; font-weight:bold">Refund Eligble: Yes</p>
       <% else %>
-       <p style="color:red; font-weight:bold">Refund Eligble: No (<%= refund_desc(@refund_status) %>)</p>
+       <p style="color:red; font-weight:bold">Refund Eligble: No (<%= @amount.refund_desc %>)</p>
      <% end %>
 
       <strong>-> Selecting the button below will downgrade your account to a Standard account.</strong><br>

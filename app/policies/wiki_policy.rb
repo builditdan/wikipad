@@ -3,13 +3,17 @@ class WikiPolicy < ApplicationPolicy
 
  def update?
 
-    if user == nil
-    	 false
-    elsif record.private_changed? && (record.user_id != user.id)
-    	false
-    else
+    if record.private_changed?
+      if user.admin?
+        true
+      elsif user.premium? && record.user_id == user.id
+        true
+      else
+        false
+      end
+   else
       true
-    end
+   end
 
  end
 
