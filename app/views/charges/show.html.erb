@@ -4,6 +4,7 @@
   <div class="col-md-12">
      <strong>Username:</strong> <%= @user.name %><br>
      <strong>Account:</strong>  <%= @user.role.capitalize %><br>
+     <strong># Private Wikis:</strong>  <%= @number_of_private_wikis %><br>
      <strong>Upgrade date:</strong>  <%= @amount.created_at %><br>
      <strong>Charged Amount:</strong>  <%= Money.us_dollar(@amount.amount_billed).format %><br>
      <br>
@@ -16,8 +17,11 @@
       <strong>-> Selecting the button below will downgrade your account to a Standard account.</strong><br>
       <strong>-> Please note your refund eligibility as noted above.</strong>
       <br>
+      <strong style="color:red">-> Please note you have <%= @number_of_private_wikis %> Private Wiki(s) that will be changed to Public if you downgrade your account today! </strong>
       <br>
-      <%= link_to "Downgrade NOW!", charges_destroy_path, method: :delete, class: 'btn btn-danger',data: {confirm: 'Are you sure you want to delete this topic?'} %>
+      <br>
+        <% confirm_msg = 'Are you sure you want to downgrade your account (' + @number_of_private_wikis.to_s + ' Private Wiki(s) exist)?' %>
+      <%= link_to "Downgrade NOW!", charges_destroy_path, method: :delete, class: 'btn btn-danger',data: {confirm: confirm_msg} %>
 
 
    </div>
