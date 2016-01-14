@@ -1,8 +1,10 @@
+<SCRIPT TYPE="text/javascript"> <!-- function popup(mylink, windowname) { if (! window.focus)return true; var href; if (typeof(mylink) == 'string') href=mylink; else href=mylink.href; window.open(href, windowname, 'width=400,height=200,scrollbars=yes'); return false; } //--> </SCRIPT>
+
 <h1><%= @wiki.title %></h1>
 
   <% if policy(@wiki).edit? %>
     <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-success' %>
-  <% end %>  
+  <% end %>
 
 
  <% if policy(@wiki).destroy? %>
@@ -13,7 +15,7 @@
 <div class="row">
   <div class="col-md-8">
     <p class="lead">
-      <%= @wiki.body %>
+      <%= markdown(@wiki.body) %>
     </p>
     <br>
   </div>
