@@ -18,6 +18,10 @@ gem "pundit"
 
 gem 'figaro', '1.0'
 
+gem 'stripe'
+
+gem 'money-rails'
+
 group :development, :test do
   gem 'sqlite3'
 

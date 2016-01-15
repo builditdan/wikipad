@@ -38,8 +38,12 @@
 
       <div class="form-group">
         <%= f.label :private, class: 'checkbox' do %>
-          <%= f.check_box :private %> Private topic
+          <% if current_user.admin? || current_user.premium? %>
+            <%= f.check_box :private %> Private topic
+          <% else %>
+            <%= f.check_box :private, disabled: true %> Private topic
           <% end %>
+        <% end %>
         </div>
         <%= f.submit "Save", class: 'btn btn-success' %>
       <% end %>

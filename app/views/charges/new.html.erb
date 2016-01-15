@@ -1,0 +1,25 @@
+<h1>Upgrade to a Premium Account</h1>
+<hr>
+<div class="row">
+   <div class="col-md-12">
+     <h4 style="color:#37ABE7"><%=@user.name %>,</h4>
+
+     <blockquote>
+       <ul style="list-style-type:square;">
+         <li>Enjoy the benefits of being a premium account today!</li>
+         <li>One time charge of $10</li>
+         <li>Cancel within 30 days for a full refund</li>
+         <li>Create private Wikis</li>
+         <li>Ability to delete your Wikis</li>
+         <li>Your public Wikis promoted on the home page once a month</li>
+         <li>Enjoy the prestige of being a premium member</li>
+      </ul>
+    </blockquote>
+
+     <%= form_tag charges_path do %>
+       <h4 style="color:red">Upgrade NOW!</h4>
+       <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
+     <% end %>
+   </div>
+
+</div>
