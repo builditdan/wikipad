@@ -1,6 +1,6 @@
 class CollaboratorsController < ApplicationController
   def show
-    byebug
+    
   end
 
   def create # POST params[:collaborator][:wiki_id] and :user_id

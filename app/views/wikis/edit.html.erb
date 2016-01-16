@@ -48,25 +48,10 @@
          <% end %>
        </div>
 
-       <br>
-       <p style="font-weight:bold">Select Wiki collaborators below </p>
-       <p>Pick more than one by holding the control key and clicking name</p>
-       <div class="form-group">
-         <div class="form-group">
-          <select style="width: 365px;" size="<%= @collaborator_list.size %>" name="selected_collaborators[]" multiple>
-            <% @collaborator_list.each do |u| %>
-                  <h4 class="media-heading">
-                    <br>
-                    <% if u.collaborator %>
-                      <option value="<%= u.user_id %>" selected="selected"><%= "#{u.name} (#{u.email})"%> </option>
-                    <% else %>
-                      <option value="<%= u.user_id %>"><%= "#{u.name} (#{u.email})"%></option>
-                    <% end %>
-                 </h4>
-            <% end %>
-          </select>
-         </div>
-       </div>
+       <% # render colab screen here only for premium users that own the wiki or admin or collaborators %>
+       <% if current_user.id == @wiki.user_id && (current_user.premium? || current_user.admin?) %>
+         <%= render partial: 'collaborators/collaborator' %>
+       <% end %>
 
        <%= f.submit "Preview", class: 'btn btn-success' %>
        &nbsp;

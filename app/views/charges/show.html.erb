@@ -5,13 +5,13 @@
      <strong>Username:</strong> <%= @user.name %><br>
      <strong>Account:</strong>  <%= @user.role.capitalize %><br>
      <strong># Private Wikis:</strong>  <%= @number_of_private_wikis %><br>
-     <strong>Upgrade date:</strong>  <%= @amount.created_at %><br>
-     <strong>Charged Amount:</strong>  <%= Money.us_dollar(@amount.amount_billed).format %><br>
+     <strong>Upgrade date:</strong>  <%= @amount.created_at if !@amount.blank?%><br>
+     <strong>Charged Amount:</strong>  <%= Money.us_dollar(@amount.amount_billed).format if !@amount.blank? %><br>
      <br>
-     <% if @amount.valid_refund? %>
+     <% if !@amount.blank? && @amount.valid_refund? %>
        <p style="color:green; font-weight:bold">Refund Eligble: Yes</p>
       <% else %>
-       <p style="color:red; font-weight:bold">Refund Eligble: No (<%= @amount.refund_desc %>)</p>
+       <p style="color:red; font-weight:bold">Refund Eligble: No (<%= @amount.refund_desc if !@amount.blank? %>)</p>
      <% end %>
 
       <strong>-> Selecting the button below will downgrade your account to a Standard account.</strong><br>

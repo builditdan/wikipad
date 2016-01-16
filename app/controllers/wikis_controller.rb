@@ -7,8 +7,9 @@ class WikisController < ApplicationController
   #before_action :authorize_moderator, except: [:show, :new,]
 
     def index
-      @wikis = Wiki.show_by_role(current_user)
-      authorize @wikis
+      #@wikis = Wiki.show_by_role(current_user)
+      @wikis = policy_scope(Wiki)
+      #authorize @wikis
     end
 
     def show
@@ -32,7 +33,7 @@ class WikisController < ApplicationController
          @collaborator_list[i].user_id = u.id
          @collaborator_list[i].name = u.name
          @collaborator_list[i].email = u.email
-         if Collaborator.find_by(user_id: u.id) != nil
+         if Collaborator.find_by(user_id: u.id, wiki_id: @wiki.id)
             @collaborator_list[i].collaborator = true
           else
             @collaborator_list[i].collaborator = false
@@ -65,14 +66,16 @@ class WikisController < ApplicationController
       authorize @wiki
       if @wiki.save
         selected_colabs = params[:selected_collaborators]
-        Collaborator.delete_all(wiki_id: @wiki.id)
-        selected_colabs.each { |c|
-            new_colaborator = Collaborator.new
-            new_colaborator.user_id = c
-            new_colaborator.wiki_id = @wiki.id
-            new_colaborator.save
-        }
-        #need to check for a failure
+        if !selected_colabs.blank?
+          Collaborator.delete_all(wiki_id: @wiki.id)
+
+          selected_colabs.each { |c|
+              new_colaborator = Collaborator.new
+              new_colaborator.user_id = c
+              new_colaborator.wiki_id = @wiki.id
+              new_colaborator.save # add for a failure check
+          }
+        end
         redirect_to @wiki, notice: "Wiki was updated successfully."
       else
         flash.now[:alert] = "There was an error updating the wiki. Please try again."
