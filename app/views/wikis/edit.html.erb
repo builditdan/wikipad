@@ -22,7 +22,9 @@
        <li>Never insult dogs or people.</li>
       <li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown</a> is supported.</li>
      </ul>
+
    </div>
+
    <div class="col-md-8">
      <%= form_for @wiki do |f| %>
        <div class="form-group">
@@ -36,18 +38,41 @@
 
 
        <div class="form-group">
-
          <%= f.label :private, class: 'checkbox' do %>
+           &nbsp;&nbsp;&nbsp;&nbsp;
            <% if current_user.admin? || (current_user.premium? && current_user.id == @wiki.user_id) %>
-             <%= f.check_box :private %> Private topic
+            <%= f.check_box :private %> Private topic
            <% else %>
-             <%= f.check_box :private, disabled: true %> Private topic
+                <%= f.check_box :private, disabled: true %> Private topic
            <% end %>
          <% end %>
        </div>
+
+       <br>
+       <p style="font-weight:bold">Select Wiki collaborators below </p>
+       <p>Pick more than one by holding the control key and clicking name</p>
+       <div class="form-group">
+         <div class="form-group">
+          <select style="width: 365px;" size="<%= @collaborator_list.size %>" name="selected_collaborators[]" multiple>
+            <% @collaborator_list.each do |u| %>
+                  <h4 class="media-heading">
+                    <br>
+                    <% if u.collaborator %>
+                      <option value="<%= u.user_id %>" selected="selected"><%= "#{u.name} (#{u.email})"%> </option>
+                    <% else %>
+                      <option value="<%= u.user_id %>"><%= "#{u.name} (#{u.email})"%></option>
+                    <% end %>
+                 </h4>
+            <% end %>
+          </select>
+         </div>
+       </div>
+
        <%= f.submit "Preview", class: 'btn btn-success' %>
        &nbsp;
        <%= f.submit "Save", class: 'btn btn-success' %>
+       <br>
+       <br>
      <% end %>
    </div>
  </div>

@@ -1,0 +1,15 @@
+<select name="the_collaborators" multiple>
+
+  <% @user = User.all %>
+  <% @user.each do |u| %>
+    <div class="pull-left">
+      <div class="media-body">
+        <h4 class="media-heading">
+          <br>
+          <option value="<%= u.id %>"><%= u.name %></option>
+        </h4>
+      </div>
+    </div>
+  <% end %>
+
+</select>

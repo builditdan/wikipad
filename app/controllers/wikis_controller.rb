@@ -22,9 +22,26 @@ class WikisController < ApplicationController
     end
 
     def edit
+      user_data = Struct.new(:user_id, :name, :email, :collaborator)
       @wiki = Wiki.find(params[:id])
       authorize @wiki
+      @collaborator_list = []
+      i = 0
+      User.all.each do |u|
+         @collaborator_list[i] = user_data.new
+         @collaborator_list[i].user_id = u.id
+         @collaborator_list[i].name = u.name
+         @collaborator_list[i].email = u.email
+         if Collaborator.find_by(user_id: u.id) != nil
+            @collaborator_list[i].collaborator = true
+          else
+            @collaborator_list[i].collaborator = false
+         end
+         i += 1
+      end
+
     end
+
 
     def create
       @wiki = Wiki.new(wiki_params)
@@ -40,10 +57,22 @@ class WikisController < ApplicationController
 
 
     def update
+
+
       @wiki = Wiki.find(params[:id])
       @wiki.assign_attributes(wiki_params)
+
       authorize @wiki
       if @wiki.save
+        selected_colabs = params[:selected_collaborators]
+        Collaborator.delete_all(wiki_id: @wiki.id)
+        selected_colabs.each { |c|
+            new_colaborator = Collaborator.new
+            new_colaborator.user_id = c
+            new_colaborator.wiki_id = @wiki.id
+            new_colaborator.save
+        }
+        #need to check for a failure
         redirect_to @wiki, notice: "Wiki was updated successfully."
       else
         flash.now[:alert] = "There was an error updating the wiki. Please try again."
