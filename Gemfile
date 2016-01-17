@@ -6,7 +6,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 group :production do
    gem 'pg'
+   gem 'rails_12factor'
+
 end
+
+gem "faker"
 
 gem 'bootstrap-sass'
 
@@ -22,6 +26,8 @@ gem 'stripe'
 
 gem 'money-rails'
 
+gem 'redcarpet', '~> 3.0.0'
+
 group :development, :test do
   gem 'sqlite3'
 
@@ -31,7 +37,7 @@ group :development, :test do
   #Testing gems
   gem 'shoulda'
   gem 'rspec-rails', '~> 3.0'
-  gem "faker"
+  #gem "faker"
 
   #Gem to help with keeping your code DRY
   gem 'factory_girl_rails', '~> 4.0'
