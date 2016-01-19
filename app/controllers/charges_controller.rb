@@ -7,6 +7,7 @@ before_action :authenticate_user!
   def show
     @user = current_user
     @amount = Amount.find_by(user_id: current_user.id)
+    @number_of_private_wikis = count_private_wikis_for_user(@user)
 
     @stripe_btn_data = {
      key: "#{ Rails.configuration.stripe[:publishable_key] }",
@@ -34,11 +35,11 @@ before_action :authenticate_user!
      @amount = Amount.find_by(user_id: current_user.id)
      authorize Amount
 
-     if @amount.unprocessed_refund?
+     if !@amount.blank? && @amount.unprocessed_refund?
           flash[:notice] = "Unable to upgrade account due to unprocessed refund, please email support!"
           redirect_to users_show_path(current_user)
           return
-     elsif @amount.last_90days_refund?
+     elsif !@amount.blank? && @amount.last_90days_refund?
           current_user.premium!
           current_user.save
           flash[:notice] = "No charge for upgrade since you upgraded previously in the last 90 days!"
@@ -88,6 +89,7 @@ before_action :authenticate_user!
 
         authorize Amount
         @amount = Amount.find_by(user_id: current_user.id)
+        @number_of_private_wikis = count_private_wikis_for_user(@current_user)
 
 
         if @amount.valid_refund?
@@ -105,7 +107,12 @@ before_action :authenticate_user!
         current_user.standard!
         current_user.save
 
-        flash[:notice] = "Thank you, #{current_user.email}. You account has been downgraded to a standard account and #{amount_refunded} has been refunded."
+        # Change this user's wikis to public
+        #Wiki.update_all "user_id = #{current_user.id}, private = 'f'"
+        Wiki.where(user_id: current_user.id).update_all("private = 'f'")
+
+        flash[:notice] = "Thank you, #{current_user.email}. You account has been downgraded to a standard account and $#{amount_refunded} has been refunded. "
+        flash[:notice] << "Please note that #{@number_of_private_wikis} of your Private Wikis have been made public!"
         redirect_to users_show_path(current_user)
 
         # Stripe will send back CardErrors, with friendly messages
