@@ -19,5 +19,7 @@
 # Ignore application configuration
 /config/application.yml
 
+# Ignore .DS_Store files used by OSX for storing custom attributes
+
 .DS_Store
 **/.DS_Store

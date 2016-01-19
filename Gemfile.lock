@@ -257,10 +257,8 @@ DEPENDENCIES
   pry-rails
   pundit
   rails (= 4.2.5)
-<<<<<<< HEAD
   rails_12factor
-=======
->>>>>>> user_story_9_Markdown
+
   redcarpet (~> 3.0.0)
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)

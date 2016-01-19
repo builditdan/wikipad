@@ -1,16 +1,23 @@
 Rails.application.routes.draw do
 
 
+  get 'collaborator/show'
+
   devise_for :users
   get 'welcome/about'
   get 'users/show'
 
-
   resources :wikis
+
+  post '/users/:user_id/wikis/:wiki_id/collaborators' => 'collaborators#add_user_to_wiki', as: :add_user_to_wiki
+  post '/users/:user_id/wikis/:wiki_id/collaborators' => 'collaborators#remove_user_from_wiki', as: :remove_user_from_wiki
+
+
   root to: 'welcome#index'
 
   resources :charges, only: [:new, :create, :show]
   delete 'charges/destroy'
+  resources :collaborators, only: [:show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

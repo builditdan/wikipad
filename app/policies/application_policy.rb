@@ -16,15 +16,15 @@ class ApplicationPolicy
 
   def show?
 
-    if @record.private
-      if (!@user.blank? && @user.admin?) or (!@user.blank? && @user.premium?)
-        true
-      else
-        false
-      end
-    else
-      true
-    end
+  # if @record.private
+  #    if (!@user.blank? && @user.admin?) or (!@user.blank? && @user.premium?)
+  #      true
+  #    else
+  #      false
+  #    end
+  #  else
+  #    true
+  #  end
 
   end
 
@@ -50,11 +50,9 @@ class ApplicationPolicy
 
   end
 
-  def edit?
-
-    user_logged_in?
-
-  end
+  #def edit?
+#      true
+#  end
 
   def destroy?
 
