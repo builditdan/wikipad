@@ -77,7 +77,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  cconfig.action_mailer.smtp_settings = {
+  config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",
       port: 587,
       domain: "localhost:3000", #Rails.application.secrets.domain_name,
@@ -88,7 +88,8 @@ Rails.application.configure do
     }
 
   #ActionMail config
-  config.action_mailer.default_url_options = { host: 'localhost', port:3000}
+  #https://cryptic-fortress-7767.herokuapp.com/
+  config.action_mailer.default_url_options = { host: 'cryptic-fortress-7767.herokuapp.com/', port:3000}
   config.action_mailer.delivery_method = :smtp
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true
