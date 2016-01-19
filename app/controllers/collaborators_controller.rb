@@ -1,6 +1,6 @@
 class CollaboratorsController < ApplicationController
   def show
-    
+
   end
 
   def create # POST params[:collaborator][:wiki_id] and :user_id
@@ -9,9 +9,9 @@ class CollaboratorsController < ApplicationController
   def destroy # DELETE id is Collaborator id
   end
 
-### you can refactor this using your belong to models
+### you could refactor this using your belong to models
   def add_user_to_wiki
-    byebug
+
       collaborator = Collaborator.new
       collaborator.user_id = params[:user_id]
       collaborator.wiki_id = params[:wiki_id]

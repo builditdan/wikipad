@@ -7,11 +7,6 @@ gem 'rails', '4.2.5'
 group :production do
    gem 'pg'
    gem 'rails_12factor'
-<<<<<<< HEAD
-
-=======
-   gem "faker"
->>>>>>> user_story_10_Wiki_Collaborators
 end
 
 gem "faker"

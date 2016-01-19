@@ -3,7 +3,6 @@ class WikiPolicy < ApplicationPolicy
 
 def edit?
 
-
   if user.blank?
     false
   elsif record.private? && (user.id != record.user_id && !user.admin? && !Collaborator.find_by(user_id: user.id, wiki_id: record.id))

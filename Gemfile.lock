@@ -258,7 +258,6 @@ DEPENDENCIES
   pundit
   rails (= 4.2.5)
   rails_12factor
-
   redcarpet (~> 3.0.0)
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)

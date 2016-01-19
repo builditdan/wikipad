@@ -7,13 +7,14 @@ Rails.application.routes.draw do
   get 'welcome/about'
   get 'users/show'
 
+  root to: 'welcome#index'
+
+
   resources :wikis
 
   post '/users/:user_id/wikis/:wiki_id/collaborators' => 'collaborators#add_user_to_wiki', as: :add_user_to_wiki
   post '/users/:user_id/wikis/:wiki_id/collaborators' => 'collaborators#remove_user_from_wiki', as: :remove_user_from_wiki
 
-
-  root to: 'welcome#index'
 
   resources :charges, only: [:new, :create, :show]
   delete 'charges/destroy'
