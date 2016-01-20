@@ -88,8 +88,7 @@ Rails.application.configure do
     }
 
   #ActionMail config
-  #https://cryptic-fortress-7767.herokuapp.com/
-  config.action_mailer.default_url_options = { host: 'wikipad1.herokuapp.com', port:3000}
+  config.action_mailer.default_url_options = { host: 'https://wikipad1.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true

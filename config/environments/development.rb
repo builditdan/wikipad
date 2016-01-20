@@ -45,7 +45,7 @@ Rails.application.configure do
       domain: "localhost:3000", #Rails.application.secrets.domain_name,
       authentication: "plain",
       enable_starttls_auto: true,
-      user_name: ENV['GMAIL_EMAIL'], # Rails.application.secrets.email_provider_username,
+      user_name: ENV['EN'], # Rails.application.secrets.email_provider_username,
       password: ENV['GMAIL_PASSWORD'] # Rails.application.secrets.email_provider_password
     }
 

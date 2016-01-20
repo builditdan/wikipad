@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   # let(:user) {create(:user)} => use when you implement factory girl
 
   let(:my_user) {User.create!(name: "Bill Smith", email: "bill@example.com", password: "password", confirmed_at: Time.now, role: :standard)}
-  
+
 
    it { should have_many(:wikis)}
 
@@ -127,8 +127,6 @@ RSpec.describe User, type: :model do
        end
     end
 
-
-
     describe ".avatar_url" do
      let (:known_user) { create(:user, name: "Mr Bloc Head", password: "Password", email: "blochead@bloc.io", confirmed_at: Time.now)}
 
@@ -148,7 +146,7 @@ RSpec.describe User, type: :model do
       end
   	end
 
-   
+
 
 #### end rspec
 end
